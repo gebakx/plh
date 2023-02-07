@@ -143,7 +143,11 @@ s = next(doc.sents)
 
 ---
 
-# Tokenització amb TextServer (FreeLing) I
+# Tokenització amb TextServer (FreeLing)
+
+### Requeriments
+
+- Script auxiliar: [textserver.py](../codes/textserver.py)
 
 ```
 from google.colab import drive
@@ -152,86 +156,16 @@ import sys
 drive.mount('/content/drive')
 sys.path.insert(0, '/content/drive/My Drive/Colab Notebooks/plh')
 from textserver import TextServer
+```
 
+### Ús
+
+```
 ts = TextServer('usuari', 'passwd', 'tokenizer') 
-```
 
-### Entrada
-
-```
-ctnt = ts.query("L'Arnau té un gos. Se l'estima molt.")
-
-```
-
-### Preprocés
-
-```
-load = lambda r: json.loads(r.encode('utf-8'))
-pars = lambda r: [p for p in r['paragraphs']]
-sents = lambda p: [s for s in p['sentences']]
-decode = lambda x: bytes(x,'latin1').decode('utf-8')
-tokens = lambda s: [decode(t['form']) for t in s['tokens']]
-```
-
----
-
-# Tokenització amb TextServer II
-
-### Sortida
-
-```
-print(ctnt)
-👉
-{ "cputime" : "0.000273", "wordcount" : "11",
- "paragraphs" : [
-   { "sentences" : [
-      { "id":"1",
-        "tokens" : [
-           { "id" : "t1.1", "begin" : "0", "end" : "2", "form" : "L'"},
-           { "id" : "t1.2", "begin" : "2", "end" : "7", "form" : "Arnau"},
-           { "id" : "t1.3", "begin" : "8", "end" : "10", "form" : "tÃ©"},
-           ...
-           { "id" : "t1.6", "begin" : "17", "end" : "18", "form" : "."}]}, 
-      { "id":"2",
-        "tokens" : [
-           { "id" : "t2.1", "begin" : "19", "end" : "21", "form" : "Se"},
-           ...
-           { "id" : "t2.5", "begin" : "35", "end" : "36", "form" : "."}]}]}]}
-```
-
-```
-list(map(tokens, sents(pars(load(ctnt))[0])))
+ts.tokenizer("L'Arnau té un gos. Se l'estima molt.")
 👉  [["L'", 'Arnau', 'té', 'un', 'gos', '.'], 
      ['Se', "l'", 'estima', 'molt', '.']]
-```
-
----
-
-# Script de connexió al TextServer
-
-```
-import requests
-
-class TextServer:
-  def __init__(self, user, pwd, service):
-    self.service = service
-    self.request_data = {
-      'username':user,
-      'password':pwd,
-      'language': 'ca',
-      'output': 'json',
-      'interactive':'1' 
-    }
-
-
-  def query(self, text):
-    url = "http://frodo.lsi.upc.edu:8080/TextWS/textservlet/ws/processQuery/" + \
-          self.service
-    self.request_data['text_input'] = text
-    resp = requests.post(url, files=self.request_data)
-    if resp.status_code != requests.codes.ok : 
-      resp.raise_for_status()
-    return resp.text
 ```
 
 ---

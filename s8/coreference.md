@@ -67,6 +67,29 @@ doc._.coref_clusters
 [https://huggingface.co/coref/](https://huggingface.co/coref/)
 
 ---
+
+# Coreferència amb Textserver
+
+### Requeriments
+
+```python3
+from google.colab import drive
+import sys
+drive.mount('/content/drive')
+sys.path.insert(0, '/content/drive/My Drive/Colab Notebooks/plh')
+from textserver import TextServer
+```
+
+### Ús
+
+```python3
+ts = TextServer('usuari', 'passwd', 'coreferences')
+
+ts.coreferences("My sister has a dog. She loves him.")
+👉  [['My sister', 'him'], ['a dog', 'She']]
+```
+
+---
 class: left, middle, inverse
 
 # Outline

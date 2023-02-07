@@ -294,17 +294,53 @@ nltk.corpus.treebank.tagged_sents()[1]
 
 # Hidden Markov Models II
 
-### Aprenent el model
+### El conjunt de dades
 
 ```
 train = nltk.corpus.treebank.tagged_sents()[:3000]
 test = nltk.corpus.treebank.tagged_sents()[3000:]
+```
 
+### Aprenent el model (MLE)
+
+```
 trainer = nltk.tag.hmm.HiddenMarkovModelTrainer()
 HMM = trainer.train_supervised(train)
 
 HMM.accuracy(test) 👉 0.36844377293330455
+
+len(set(test).difference(train)) 👉 1629
 ```
+
+---
+
+# Hidden Markov Models III
+
+### Aprenent el model (LID smoothing)
+
+```
+def LID(fd, bins):
+  return nltk.probability.LidstoneProbDist(fd, 0.1, bins)
+
+trainer = nltk.tag.hmm.HiddenMarkovModelTrainer()
+HMM = trainer.train_supervised(train, estimator=LID)
+
+HMM.accuracy(test) 👉 0.8984243470753291
+
+```
+
+### Aprenent el model (LID smoothing)
+
+```
+HMM = nltk.HiddenMarkovModelTagger.train(train)
+
+HMM.accuracy(test) 👉 0.8984243470753291
+
+```
+
+---
+
+# Hidden Markov Models IV
 
 ### Guardant el model
 
@@ -317,27 +353,6 @@ drive.mount('/content/drive')
 with open('/content/drive/My Drive/models/hmmTagger.dill', 'wb') as f:
     dill.dump(HMM, f)
 ```
-
-
----
-
-# Hidden Markov Models III
-
-### Aplicació del model
-
-```
-with open('/content/drive/My Drive/models/hmmTagger.dill', "rb") as f:
-    tagger = dill.load(f)
-
-tagger.tag(['the', 'men', 'attended', 'to', 'the', 'meetings'])
-👉 [('the', 'DT'),
-    ('men', 'NNS'),
-    ('attended', 'VBD'),
-    ('to', 'TO'),
-    ('the', 'DT'),
-    ('meetings', 'NNS')]
-```
-
 
 ---
 class: left, middle, inverse
