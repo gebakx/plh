@@ -78,3 +78,25 @@ class TextServer:
     else:
       return list(map(lambda s: info(s, cols), sents(pars(load(ctnt))[0])))
 
+  def dependencies(self, text, pandas=False):
+    def filtre(d): 
+      res = {}
+      for k in d:
+        if k != 'token':
+          if k!='children':
+            res[k] = d[k]
+          else:
+            res[k] = list(map(filtre,d[k]))
+      return res
+        
+    self.service = 'dependencies'
+    ctnt = self.query(text)
+    deps = [x[0] for x in map(lambda x: x['dependencies'], sents(pars(load(ctnt))[0]))]
+    return list(map(filtre, deps))
+
+  def coreferences(self, text, pandas=False):
+    self.service = 'coreferences'
+    self.request_data['language'] = 'en'
+    ctnt = self.query(text)
+    return [[c['words'] for c in x['mentions']] for x in load(ctnt)['coreferences']]
+      

@@ -119,11 +119,13 @@ is the use of a book,’ thought Alice ‘without pictures or conversations?’
 
 ### Enunciat 
 
-* Apliqueu la coreferència d'spaCy sobre el paràgraf anterior
+* Apliqueu les coreferències d'spaCy i TextServer sobre el paràgraf anterior
 
 * Mostreu les cadenes de coreferència
 
-* Què en penseu del resultat?
+* Compareu els resultats.
+
+* Què en penseu del resultats?
 
 
 
