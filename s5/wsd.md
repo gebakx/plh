@@ -4,7 +4,7 @@ class: center, middle
 
 # Lab.5: nivell lèxic - semàntica - <br> desambiguació de sentits
 
-### Gerard Escudero
+### Gerard Escudero, Salvador Mediana i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 

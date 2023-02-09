@@ -4,7 +4,7 @@ class: center, middle
 
 # Lab.7: frases - *parsing*
 
-### Gerard Escudero
+### Gerard Escudero, Salvador Mediana i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 

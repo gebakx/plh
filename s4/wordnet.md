@@ -5,7 +5,7 @@ class: center, middle
 # Lab.4: nivell lèxic - <br> semàntica - *WordNet*
 
 
-### Gerard Escudero
+### Gerard Escudero, Salvador Mediana i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 

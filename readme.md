@@ -2,23 +2,23 @@
 
 .col5050[
 .col1[
-### Sessions
+### Material
 
-- [Presentació](s1/index.html)
+- [Presentació](s1/index.html) (sessió 1)
 
-- [Nivell textual](s2/index.html) (2 sessions)
+- [Nivell textual](s2/index.html) (sessions 2 i 3)
 
-- [Lèxic - morfologia](s3/index.html)
+- [Paraules - morfosintaxi](s3/index.html) (sessió 4)
 
-- [Lèxic - semàntica - *WordNet*](s4/index.html)
+- [Paraules - semàntica - *WordNet*](s4/index.html) (sessió 5)
 
-- [Lèxic - semàntica - desambiguació de sentits](s5/index.html)
+- [Paraules - semàntica - <br>desambiguació de sentits](s5/index.html) (sessió 6)
 
-- [Seqüències de paraules](s6/index.html)
+- [Seqüències de paraules](s6/index.html) (sessió 1)
 
-- [Frases - sintaxi](s7/index.html)
+- [Frase - sintaxi](s7/index.html) (sessió 1)
 
-- [Text - coreferència](s8/index.html)
+- [Text - coreferència](s8/index.html) (sessió 1)
 ]
 .col2[
 
@@ -35,6 +35,14 @@
 - [FreeLing](https://nlp.lsi.upc.edu/freeling/node/1)
 
 - [spaCy](https://spacy.io/)
+
+### Autors
+
+- Gerard Escudero
+
+- Salvador Medina
+
+- Jordi Turmo
 
 ]
 ]

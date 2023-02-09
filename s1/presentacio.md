@@ -6,7 +6,7 @@ class: center, middle
 
 <br>
 
-### Gerard Escudero
+### Gerard Escudero, Salvador Mediana i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 

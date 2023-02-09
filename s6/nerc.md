@@ -4,7 +4,7 @@ class: center, middle
 
 # Lab.6: seqüències de paraules
 
-### Gerard Escudero
+### Gerard Escudero, Salvador Mediana i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 
