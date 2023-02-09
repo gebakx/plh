@@ -4,7 +4,7 @@ class: center, middle
 
 # Lab.8: text - coreferència
 
-### Gerard Escudero, Salvador Mediana i Jordi Turmo
+### Gerard Escudero, Salvador Medina i Jordi Turmo
 
 ## Grau en Intel·ligència Artificial
 
