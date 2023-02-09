@@ -14,11 +14,11 @@
 
 - [Paraules - semàntica - <br>desambiguació de sentits](s5/index.html) (sessió 6)
 
-- [Seqüències de paraules](s6/index.html) (sessió 1)
+- [Seqüències de paraules](s6/index.html) (sessió 7)
 
-- [Frase - sintaxi](s7/index.html) (sessió 1)
+- [Frase - sintaxi](s7/index.html) (sessions 8 i 9)
 
-- [Text - coreferència](s8/index.html) (sessió 1)
+- [Text - coreferència](s8/index.html) (sessió 10)
 ]
 .col2[
 
