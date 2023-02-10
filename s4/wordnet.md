@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.4: nivell lèxic - <br> semàntica - *WordNet*
+# Lab.4: paraules - <br> semàntica - *WordNet*
 
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo

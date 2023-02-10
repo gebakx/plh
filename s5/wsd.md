@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.5: nivell lèxic - semàntica - <br> desambiguació de sentits
+# Lab.5: paraules - semàntica - <br> desambiguació de sentits
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 

@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.7: frases - *parsing*
+# Lab.7: frase - sintaxi
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 

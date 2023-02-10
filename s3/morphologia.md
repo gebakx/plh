@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.3: nivell lèxic - morfologia
+# Lab.3: paraules - morfosintaxi
 
 <br>
 
