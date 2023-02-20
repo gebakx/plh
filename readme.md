@@ -1,27 +1,35 @@
 ## Laboratori de PLH
 
 .col5050[
-.col1[
+.col1-smaller[
 ### Material
 
-- [Presentació](s1/index.html) (sessió 1)
+- S1: [Presentació](s1/index.html)
 
-- [Nivell textual](s2/index.html) (sessions 2 i 3)
+- S2, S3: [Nivell Textual](s2/index.html)
+  - (Pràctica 1: Identificació d'Idioma)
 
-- [Paraules - morfosintaxi](s3/index.html) (sessió 4)
+- S4: [Paraules - Morfosintaxi](s3/index.html)
 
-- [Paraules - semàntica - *WordNet*](s4/index.html) (sessió 5)
+- S5: [Paraules - Semàntica - *WordNet*](s4/index.html)
+  - (Pràctica 2: Identificació d'Opinions)
 
-- [Paraules - semàntica - <br>desambiguació de sentits](s5/index.html) (sessió 6)
+- S6: [Paraules - Semàntica - <br> Desambiguació de sentits](s5/index.html)
 
-- [Seqüències de paraules](s6/index.html) (sessió 7)
+- S7: [Seqüències de paraules](s6/index.html) 
+  - (Pràctica 3: Extracció d'Informació)
 
-- [Frase - sintaxi](s7/index.html) (sessions 8 i 9)
+- S8, S9: [Frase - Sintaxi](s7/index.html)
 
-- [Text - coreferència](s8/index.html) (sessió 10)
+- S10: [Text - Coreferència](s8/index.html)
+
+- S12: [Word Embeddings Distribucionals](s9/index.html)
+  - (Pràctica 4: Word Embeddings)
+
+- S13: [Word Embeddings Contextuals](s10/index.html)
 ]
-.col2[
 
+.col2[
 ### Referències externes
 
 - [Google Colab](https://colab.research.google.com)

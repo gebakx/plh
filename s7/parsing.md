@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.7: frase - sintaxi
+# Lab. 8 i 9: Frase - Sintaxi
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 
@@ -16,21 +16,26 @@ class: center, middle
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Parsing de constituents]
 
   - No probabilístics
 
   - Probabilístics
+- Exercici Constituents
 
-- Parsing de dependències
+- Parsing de Dependències
 
-- Exercici
+- Exercici Dependències
 
 ---
 
 # Parsing de constituents amb l'NLTK
+
+TODO: Afegir CCGChartParser (CKY) Chomsky Normal Form
+Idea: Donada una gramatica no CNF, fer el necesari...
+TODO: Viterbi amb CKY
 
 ### Parsers no probabilístics
 
@@ -55,7 +60,7 @@ class: left, middle, inverse
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Parsing de constituents]
 
@@ -191,7 +196,7 @@ parse = parser.parse(sent)
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Parsing de constituents]
 
@@ -384,7 +389,7 @@ tree
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .brown[Parsing de constituents]
 
@@ -491,7 +496,7 @@ ts.dependencies('El nen salta per sobre la roca.')
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .brown[Parsing de constituents]
 

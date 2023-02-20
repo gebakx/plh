@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.8: text - coreferència
+# Lab. 10: Text - Coreferència
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 
@@ -15,7 +15,7 @@ class: center, middle
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
@@ -92,7 +92,7 @@ ts.coreferences("My sister has a dog. She loves him.")
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .brown[Documentació]
 

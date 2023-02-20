@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.6: seqüències de paraules
+# Lab. 7: Seqüències de Paraules
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 
@@ -16,33 +16,38 @@ class: center, middle
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
-  - .cyan[Models entitats nominals]
+  - .cyan[Models d'Entitats Enomenades]
 
   - *Parsing* amb expressions regulars
 
   - Aprenent seqüències
 
-- Pràctica
-
-  - Extracció d'informació
+- Pràctica 3: Extracció d'Informació
 
 ---
 
-# Entitats nominals amb NLTK I
+# NER (II)
 
-Model de màxima entropia (PERSON, LOCATION, ORGANIZATION)
+
+---
+
+# Entitats Enomenades amb NLTK I
+
+- Fa servir un model de màxima entropia per defecte
+- Aprés amb Connl: PERSON, LOCATION, ORGANIZATION
+- Només reconeixen entitats a un nivell (no subsumcions)
 
 **Requeriments**:
 
 ```python3
 import nltk
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
+nltk.download('punkt') # Tokenitzador
+nltk.download('averaged_perceptron_tagger') # Etiquetador POS
+nltk.download('maxent_ne_chunker') # Etiquetador Entitats Enomenades
 nltk.download('words')
 ```
 
@@ -92,6 +97,10 @@ import svgling
 ---
 
 # Entitats nominals amb spaCy I
+
+* Deep Convolutional Neural Network
+* Word Embeddings (Ho estudiarem més endavant)
+* Aprés amb Ontonotes: CARDINAL, DATE, EVENT, ... (i 15 més)
 
 **Requeriments**:
 
@@ -218,25 +227,29 @@ ts.entities("Mark Pedersen treballa a Google des del 1994.", pandas=True)
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
-  - .brown[Models entitats nominals]
+  - .brown[Models d'Entitats Enomenades]
 
-  - .cyan[*Parsing* amb expressions regulars]
+  - .cyan[*Parsing* amb Expressions Regulars]
 
-  - Aprenent seqüències
+  - Aprenent Seqüències
 
-- Pràctica
+- Pràctica 3: Extracció d'Informació
 
-  - Extracció d'informació
+---
+
+# NP Chunking (III)
 
 
 ---
 
 # RegexpParser de l'NLTK
-
+# TODO: Canviar Ex (NER) - O treure - Dir RegExp
+# Moure a TOP
+# Currency, Tel., ... 
 ### Exemple
 
 ```python3
@@ -258,19 +271,17 @@ cp.parse(sentence)
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
-  - .brown[Models entitats nominals]
+  - .brown[Models d'Entitats Enomenades]
 
   - .brown[*Parsing* amb expressions regulars]
 
-  - .cyan[Aprenent seqüències]
+  - .cyan[Aprenent Seqüències]
 
-- Pràctica
-
-  - Extracció d'informació
+- Pràctica 3: Extracció d'Informació
 
 ---
 
@@ -350,6 +361,9 @@ ChunkParse score:
     Recall:        24.2%%
     F-Measure:     31.6%%
 ```
+---
+
+# POS Tagging (I)
 
 ---
 
@@ -395,27 +409,28 @@ tagger.tag(['the', 'men', 'attended', 'to', 'the', 'meetings'])
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .brown[Documentació]
 
-  - .brown[Models entitats nominals]
+  - .brown[Models d'Entitats Enomenades]
 
   - .brown[*Parsing* amb expressions regulars]
 
-  - .brown[Aprenent seqüències]
+  - .brown[Aprenent Seqüències]
 
-- .cyan[Pràctica]
-
-  - .cyan[Extracció d'informació]
+- .cyan[Pràctica 3: Extracció d'Informació]
 
 ---
 
-# Extracció d'informació (pràctica 3)
+# Extracció d'entitats enomenades (pràctica 3)
 
 
 **Enunciat**:
 
   - Entrenar NER amb CRF
+    - Afegir més features:
+      - get_features
+    - Conll (BIO / BIOW / IO)
 
   - Extreure NEs de texts nous

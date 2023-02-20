@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.5: paraules - semàntica - <br> desambiguació de sentits
+# Lab. 6: Paraules - Semàntica - <br> Desambiguació de Sentits
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
 
@@ -15,17 +15,13 @@ class: center, middle
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
   - .cyan[Lesk amb NLTK]
 
   - UKB amb TextServer
-
-- Pràctica
-
-  - UKB i SentiWornet
 
 ---
 
@@ -59,17 +55,13 @@ synset.name(), synset.definition()
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .cyan[Documentació]
 
   - .brown[Lesk amb NLTK]
 
   - .cyan[UKB amb TextServer]
-
-- Pràctica
-
-  - UKB i SentiWornet
 
 ---
 
@@ -127,41 +119,11 @@ ts.senses("L'Arnau té un gos. Se l'estima molt.", pandas=True)
 ---
 class: left, middle, inverse
 
-# Outline
+# Sumari
 
 - .brown[Documentació]
 
   - .brown[Lesk amb NLTK]
 
   - .brown[UKB amb TextServer]
-
-- .cyan[Pràctica]
-
-  - .cyan[Detecció d'opinions]
-
----
-
-# Detecció d'opinions (pràctica 2.b)
-
-#### Enunciat
-
-* Implementeu un detector d'opinions positives o negatives no supervisat
-  1. Apliqueu l'UKB per obtenir els synsets de les paraules
-  2. Obtingueu els valors SentiWordnet de cada synset
-
-* Utilitzeu com a dades el/els conjunts de test que hagueu utilitzat a la pràctica 2.a
-
-* Penseu en com podeu combinar aquests valors per obtenir un resultat
-
-* Penseu que fareu si el synset no hi és a SentiWordnet
-
-* Penseu quines categories utilitzareu:
-  - només adjectius
-  - noms, adjectius i adverbis
-  - noms, adjectius, verbs i adverbis
-
-* Analitzeu els resultats i compareu-los amb els de la part supervisada
-
-
-
 

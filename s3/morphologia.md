@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.3: paraules - morfosintaxi
+# Lab. 4: Paraules - Morfosintaxi
 
 <br>
 
@@ -28,10 +28,6 @@ class: left, middle, inverse
 - Exercici
 
   - *Hidden Markov Models*
-
-- Pràctica
-
-  - Detecció d'opinions
 
 ---
 
@@ -236,10 +232,6 @@ class: left, middle, inverse
 
   - *Hidden Markov Models*
 
-- Pràctica
-
-  - Detecció d'opinions
-
 ---
 
 # Models morfosintàctics
@@ -369,10 +361,6 @@ class: left, middle, inverse
 
   - .cyan[*Hidden Markov Models*]
 
-- Pràctica
-
-  - Detecció d'opinions
-
 ---
 
 # Hidden Markov Models (exercici)
@@ -405,10 +393,6 @@ class: left, middle, inverse
 - .brown[Exercici]
 
   - .brown[*Hidden Markov Models*]
-
-- .cyan[Pràctica]
-
-  - .cyan[Detecció d'opinions]
 
 ---
 
@@ -482,29 +466,5 @@ Codificador *bag of words*
 
 .blue[Referència]: <br>
 .footnote[[https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html)]
-
----
-
-# Detecció d'opinions (pràctica 2.a)
-
-#### Recursos
-
-* Movie Reviews Corpus
-
-#### Enunciat
-
-* Implementeu un detector d'opinions positives o negatives amb alguns algoritmes d'aprenentatge supervisat de l'sklearn
-
-* Utilitzeu com a dades el Movie Reviews Corpus de l'NLTK
-
-* Dissenyeu i apliqueu un protocol de validació
-
-* Utilitzeu el preprocés que cregueu més convenient: eliminació d'*stop words*, signes de puntuació...
-
-* Utilitzeu el CountVectorizer per representar la informació
-
-* Doneu la precisions (*accuracy*) i la matrius de confusió
-
-* Analitzeu els resultats
 
 

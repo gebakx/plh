@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.2: nivell textual
+# Lab. 2 i 3: Nivell Textual
 
 <br>
 
@@ -29,9 +29,7 @@ class: left, middle, inverse
 
   - Zones textuals
 
-- Pràctica: nivell textual
-
-  - Identificació d'idioma
+- Pràctica 1: Identificació d'Idioma
 
 ---
 
@@ -183,9 +181,7 @@ class: left, middle, inverse
 
   - Zones textuals
 
-- Pràctica: nivell textual
-
-  - Identificació d'idioma
+- Pràctica 1: Identificació d'Idioma
 
 ---
 
@@ -234,9 +230,7 @@ class: left, middle, inverse
 
   - Zones textuals
 
-- Pràctica: nivell textual
-
-  - Identificació d'idioma
+- Pràctica 1: Identificació d'Idioma
 
 ---
 
@@ -307,9 +301,7 @@ class: left, middle, inverse
 
   - .cyan[Zones textuals]
 
-- Pràctica: nivell textual
-
-  - Identificació d'idioma
+- Pràctica 1: Identificació d'Idioma
 
 ---
 
@@ -392,9 +384,7 @@ class: left, middle, inverse
 
   - .brown[Zones textuals]
 
-- .cyan[Pràctica: nivell textual]
-
-  - .cyan[Identificació d'idioma]
+- .cyan[Pràctica 1: Identificació d'Idioma]
 
 ---
 

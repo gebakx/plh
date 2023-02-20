@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.1: presentació
+# Lab. 1: Presentació
 
 <br>
 

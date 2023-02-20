@@ -2,7 +2,7 @@ class: center, middle
 
 ## Processament del Llenguatge Humà
 
-# Lab.4: paraules - <br> semàntica - *WordNet*
+# Lab. 5: Paraules - <br> Semàntica - *WordNet*
 
 
 ### Gerard Escudero, Salvador Medina i Jordi Turmo
@@ -25,6 +25,9 @@ class: left, middle, inverse
 - SentiWordNet
 
 - Exercici
+
+- Pràctica 2: Detecció d'Opinions
+
 
 ---
 
@@ -49,12 +52,12 @@ wn.synsets('age','n')
 ```python3
 age = wn.synset('age.n.1')
 
-age.definition()  👉  'how long something has existed'
+age.definition()  # 👉  'how long something has existed'
 
-age.examples()  👉  ['it was replaced because of its age']
+age.examples()  # 👉  ['it was replaced because of its age']
 
 [l.name() for l in wn.synset('historic_period.n.01').lemmas()]
-👉  ['historic_period', 'age']
+# 👉  ['historic_period', 'age']
 ```
 
 Referència: [http://www.nltk.org/howto/wordnet.html](http://www.nltk.org/howto/wordnet.html)
@@ -193,6 +196,8 @@ class: left, middle, inverse
 - SentiWordNet
 
 - Exercici
+- 
+- Pràctica 2: Detecció d'Opinions
 
 ---
 
@@ -237,6 +242,8 @@ class: left, middle, inverse
 
 - Exercici
 
+- Pràctica 2: Detecció d'Opinions
+
 ---
 
 # SentiWordnet in NLTK
@@ -277,6 +284,8 @@ class: left, middle, inverse
 
 - .cyan[Exercici]
 
+- Pràctica 2: Detecció d'Opinions
+
 ---
 
 # Exercici
@@ -294,6 +303,69 @@ Donat el conjunt de paraules següent:
   - Podeu mostrar els resultats en taules
 
 3. Quina similaritat veieu més adequada per a aquest conjunt de paraules?
+
+---
+class: left, middle, inverse
+
+# Sumari
+
+- .brown[WordNet]
+
+- .brown[Similaritats]
+
+- .brown[SentiWordNet]
+
+- .brown[Exercici]
+
+- .cyan[Pràctica 2: Detecció d'Opinions]
+---
+
+# Detecció d'opinions (pràctica 2.a)
+
+#### Recursos
+
+* Movie Reviews Corpus
+
+#### Enunciat
+
+* Implementeu un detector d'opinions positives o negatives amb alguns algoritmes d'aprenentatge supervisat de l'sklearn
+
+* Utilitzeu com a dades el Movie Reviews Corpus de l'NLTK
+
+* Dissenyeu i apliqueu un protocol de validació
+
+* Utilitzeu el preprocés que cregueu més convenient: eliminació d'*stop words*, signes de puntuació...
+
+* Utilitzeu el CountVectorizer per representar la informació
+
+* Doneu la precisions (*accuracy*) i la matrius de confusió
+
+* Analitzeu els resultats
+
+
+---
+
+# Detecció d'opinions (pràctica 2.b)
+
+#### Enunciat
+
+* Implementeu un detector d'opinions positives o negatives no supervisat
+  1. Apliqueu l'UKB per obtenir els synsets de les paraules
+  2. Obtingueu els valors SentiWordnet de cada synset
+
+* Utilitzeu com a dades el/els conjunts de test que hagueu utilitzat a la pràctica 2.a
+
+* Penseu en com podeu combinar aquests valors per obtenir un resultat
+
+* Penseu que fareu si el synset no hi és a SentiWordnet
+
+* Penseu quines categories utilitzareu:
+  - només adjectius
+  - noms, adjectius i adverbis
+  - noms, adjectius, verbs i adverbis
+
+* Analitzeu els resultats i compareu-los amb els de la part supervisada
+
 
 
 
