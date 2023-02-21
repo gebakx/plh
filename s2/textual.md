@@ -19,13 +19,17 @@ class: left, middle, inverse
 
 # Sumari
 
-- .cyan[Documentació]
+- .cyan[Sessió]
 
   - .cyan[Tokenització]
+  
+    - Exercici 1: Tokenització
 
   - Mesures de similaritat
 
   - Models de llengua
+
+  - Exercici 2: Models de Llengua
 
   - Zones textuals
 
@@ -165,19 +169,73 @@ ts.tokenizer("L'Arnau té un gos. Se l'estima molt.")
 👉  [["L'", 'Arnau', 'té', 'un', 'gos', '.'], 
      ['Se', "l'", 'estima', 'molt', '.']]
 ```
+---
+
+class: left, middle, inverse
+
+# Sumari
+
+- .cyan[Sessió]
+
+  - .brown[Tokenització]
+  
+  - .cyan[Exercici 1: Tokenització]
+
+  - Mesures de similitud
+
+  - Models de llengua
+
+  - Exercici 2: Models de Llengua
+
+  - Zones textuals
+
+- Pràctica 1: Identificació d'Idioma
+
+
+---
+
+# Exercici 1: Tokenització
+
+### Recursos:
+Corpus paral·lel del Parlament Europeu.
+Aquest corpus inclou transcripcions i traduccions d'intervencions al Parlament Europeu per a diversos idiomes.
+
+```python3
+import nltk
+# Descarreguem l'Europarl Corpus
+nltk.download('europarl_raw')
+import nltk.corpus.europarl_raw as europarl
+# Obtenim la llista de documents a europarl per l'Anglès
+europarl.english.fileids()
+# Obtenim el text del document 'ep-00-01-17.en'
+raw_text = europarl.english.raw('ep-00-01-17.en')
+```
+
+### Enunciat
+* Tokenitzeu el document 'ep-00-01-17.en' amb els tokenitzadors
+descrits en aquesta sessió. 
+* Llisteu les diferències obtingudes (comparant els tokens com a sets).
+* Descriviu i analitzeu aquestes diferències.
+* Torneu a realitzar aquest procés pel document `europarl.spanish.raw('ep-00-01-17.es')`, 
+sense canviar els tokenitzadors (Anglès) i amb tokeni∫tzadors pel Castellà de Spacy i TextServer.
+* Compareu els resultats.
 
 ---
 class: left, middle, inverse
 
 # Sumari
 
-- .cyan[Documentació]
+- .cyan[Sessió]
 
   - .brown[Tokenització]
+  
+  - .brown[Exercici 1: Tokenització]
 
   - .cyan[Mesures de similaritat]
 
   - Models de llengua
+
+  - Exercici 2: Models de Llengua
 
   - Zones textuals
 
@@ -220,13 +278,17 @@ class: left, middle, inverse
 
 # Sumari
 
-- .cyan[Documentació]
+- .cyan[Sessió]
 
   - .brown[Tokenització]
+  
+  - .brown[Exercici 1: Tokenització]
 
   - .brown[Mesures de similaritat]
 
   - .cyan[Models de llengua]
+
+  - Exercici 2: Models de Llengua
 
   - Zones textuals
 
@@ -291,13 +353,54 @@ class: left, middle, inverse
 
 # Sumari
 
-- .cyan[Documentació]
+- .cyan[Sessió]
 
   - .brown[Tokenització]
+  
+  - .brown[Exercici 1: Tokenització]
 
   - .brown[Mesures de similaritat]
 
   - .brown[Models de llengua]
+
+  - .cyan[Exercici 2: Models de Llengua]
+
+  - Zones textuals
+
+- Pràctica 1: Identificació d'Idioma
+
+---
+
+# Exercici 2: Models de Llengua
+
+### Recursos
+Com a l'Exercici 1, Corpus paral·lel del Paralment Europeu.
+
+### Enunciat:
+* Calculeu els 10 2-grams més freqüents (ordenats) per a l'arxiu `europarl.english.raw('ep-00-01-17.en')`.
+* Per cada un dels arxius en Anglès (`europarl.english.fileids()`), calculeu el percentatge d'aquests 10 2-grams 
+que també es troben en cadascun d'aquests arxius.
+* Feu el mateix per a l'arxiu `'ep-00-01-18'`, en aquest cas pels diferents idiomes:
+danish, dutch, english, finnish, french, german, greek, italian, portuguese, spanish i swedish.
+* És suficient aquest model per identificar l'idioma Anglès?
+* Què passa si fem servir 1-grams? I 5-grams?
+---
+
+class: left, middle, inverse
+
+# Sumari
+
+- .cyan[Sessió]
+
+  - .brown[Tokenització]
+  
+  - .brown[Exercici 1: Tokenització]
+
+  - .brown[Mesures de similaritat]
+
+  - .brown[Models de llengua]
+
+  - .brown[Exercici 2: Models de Llengua]
 
   - .cyan[Zones textuals]
 
@@ -374,13 +477,17 @@ class: left, middle, inverse
 
 # Sumari
 
-- .brown[Documentació]
+- .brown[Sessió]
 
   - .brown[Tokenització]
+  
+  - .brown[Exercici 1: Tokenització]
 
   - .brown[Mesures de similaritat]
 
   - .brown[Models de llengua]
+
+  - .brown[Exercici 2: Models de Llengua]
 
   - .brown[Zones textuals]
 
