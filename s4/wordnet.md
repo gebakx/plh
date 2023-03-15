@@ -216,11 +216,11 @@ cat = wn.synset('cat.n.01')
 ```python3
 dog.lowest_common_hypernyms(cat)  👉  [Synset('carnivore.n.01')]
 
-dog.path_similarity(cat)  👉  0.2
+dog.path_similarity(cat)  # 👉  0.2
 
-dog.lch_similarity(cat)  👉  2.0281482472922856
+dog.lch_similarity(cat)  # 👉  2.0281482472922856
 
-dog.wup_similarity(cat)  👉  0.8571428571428571
+dog.wup_similarity(cat)  # 👉  0.8571428571428571
 
 nltk.download('wordnet_ic')
 from nltk.corpus import wordnet_ic
@@ -268,7 +268,7 @@ sentiSynset = swn.senti_synset(synset.name())
 **Scores**: positiu, negatiu i objectivitat
 ```python3
 sentiSynset.pos_score(), sentiSynset.neg_score(), sentiSynset.obj_score()
-👉  (0.75, 0.0, 0.25)
+# 👉  (0.75, 0.0, 0.25)
 ```
 
 ---
@@ -338,10 +338,82 @@ class: left, middle, inverse
 
 * Utilitzeu el CountVectorizer per representar la informació
 
-* Doneu la precisions (*accuracy*) i la matrius de confusió
+* Doneu la precisió (*accuracy*) i les matrius de confusió
 
 * Analitzeu els resultats
 
+---
+
+# NLTK’s Movie Reviews Corpus
+
+**Polarity corpus**: 
+- 1000 exemples positius i 1000 negatius
+
+**Requeriments**:
+
+```python3
+import nltk
+nltk.download('movie_reviews')
+from nltk.corpus import movie_reviews as mr
+```
+
+**Ús**:
+
+```python3
+mr.fileids('pos')[:2]
+# 👉  
+['pos/cv000_29590.txt',
+ 'pos/cv001_18431.txt']
+
+len(mr.fileids('neg'))
+# 👉 1000
+
+mr.words('pos/cv000_29590.txt')
+# 👉
+['films', 'adapted', 'from', 'comic', 'books', 'have', ...]
+```
+
+---
+
+# CountVectorizer de l'sklearn 
+
+Codificador *bag of words* 
+
+.cols5050[
+.col1[
+**Exemple**:
+
+- This is the first document.
+- This document is the second document.
+- And this is the third one.
+- Is this the first document?
+
+**Matriu resultant**:
+
+0 1 1 1 0 0 1 0 1 <br>
+0 2 0 1 0 1 1 0 1 <br>
+1 0 0 1 1 0 1 1 1 <br>
+0 1 1 1 0 0 1 0 1 <br>
+
+]
+.col2[
+**Diccionari**:
+
+| index | word |
+|---|---|
+| 0 | and |
+| 1 | document | 
+| 2 | first |
+| 3 | is |
+| 4 | one |
+| 5 | second |
+| 6 | the |
+| 7 | third |
+| 8 | this |
+]]
+
+.blue[Referència]: <br>
+.footnote[[https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html)]
 
 ---
 

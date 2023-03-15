@@ -374,7 +374,7 @@ class: left, middle, inverse
 # Exercici 2: Models de Llengua
 
 ### Recursos
-Com a l'Exercici 1, Corpus paral·lel del Paralment Europeu.
+Com a l'Exercici 1, Corpus paral·lel del Parlament Europeu.
 
 ### Enunciat:
 * Calculeu els 10 2-grams més freqüents (ordenats) per a l'arxiu `europarl.english.raw('ep-00-01-17.en')`.
