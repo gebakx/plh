@@ -20,7 +20,7 @@ class: left, middle, inverse
 
 - .cyan[Documentació]
 
-  - .cyan[Models d'Entitats Enomenades]
+  - .cyan[Models d'Entitats Anomenades]
 
   - *Parsing* amb expressions regulars
 
@@ -35,7 +35,7 @@ class: left, middle, inverse
 
 ---
 
-# Entitats Enomenades amb NLTK I
+# Entitats Anomenades amb NLTK I
 
 - Fa servir un model de màxima entropia per defecte
 - Aprés amb Connl: PERSON, LOCATION, ORGANIZATION
@@ -47,7 +47,7 @@ class: left, middle, inverse
 import nltk
 nltk.download('punkt') # Tokenitzador
 nltk.download('averaged_perceptron_tagger') # Etiquetador POS
-nltk.download('maxent_ne_chunker') # Etiquetador Entitats Enomenades
+nltk.download('maxent_ne_chunker') # Etiquetador Entitats Anomenades
 nltk.download('words')
 ```
 
@@ -231,7 +231,7 @@ class: left, middle, inverse
 
 - .cyan[Documentació]
 
-  - .brown[Models d'Entitats Enomenades]
+  - .brown[Models d'Entitats Anomenades]
 
   - .cyan[*Parsing* amb Expressions Regulars]
 
@@ -275,7 +275,7 @@ class: left, middle, inverse
 
 - .cyan[Documentació]
 
-  - .brown[Models d'Entitats Enomenades]
+  - .brown[Models d'Entitats Anomenades]
 
   - .brown[*Parsing* amb expressions regulars]
 
@@ -413,7 +413,7 @@ class: left, middle, inverse
 
 - .brown[Documentació]
 
-  - .brown[Models d'Entitats Enomenades]
+  - .brown[Models d'Entitats Anomenades]
 
   - .brown[*Parsing* amb expressions regulars]
 
@@ -423,14 +423,41 @@ class: left, middle, inverse
 
 ---
 
-# Extracció d'entitats enomenades (pràctica 3)
+# Extracció d'entitats anomenades (pràctica 3)
 
+**Recursos**
+```python3
+nltk.download('conll2002')
+from nltk.corpus import conll2002
+conll2002.iob_sents('esp.train') # Train, ned.train => Neerlandès
+conll2002.iob_sents('esp.testa') # Dev
+conll2002.iob_sents('esp.testb') # Test
+```
 
 **Enunciat**:
 
-  - Entrenar NER amb CRF
-    - Afegir més features:
-      - get_features
-    - Conll (BIO / BIOW / IO)
+- Implementeu un reconeixedor d'entitats anomenades amb 
+conditional random fields
+  - Feu servir la classe nltk.tag.CRFTagger
+  - Entreneu un model diferent per a Espanyol i Neerlandès
+- Experimenteu amb features addicionals (paràmetre `feature_func`).
+- Experimenteu amb diferents codificacions:
+  - BIO / BIOW / IO / ...
+- Executeu el vostre model amb textos reals
+- Comenteu els resultats
 
-  - Extreure NEs de texts nous
+# Feature functions a NLTK (CRF):
+- La funció d'extracció de features per defecte a la classe `nltk.tag.CRFTagger` de NLTK inclou les següents features:
+  - Paraula actual
+  - És majúscula?
+  - Té signes de puntuació?
+  - Té números?
+  - Sufixos
+- Aquesta funció es pot modificar mitjançant el paràmetre `feature_func` del constructor. Alternativament, podeu estendre la classe i implementar la funció `_get_features`.
+```python3
+def get_features(tokens: List[str], idx: int) -> List[str]:
+````
+- Idees:
+  - Morfologia,longitud,
+  - Prefixos,lemmas,POS-Tags
+  - Gazetteers,llistes de paraules
