@@ -246,11 +246,7 @@ class: left, middle, inverse
 
 ---
 
-# RegexpParser de l'NLTK
-# TODO: Canviar Ex (NER) - O treure - Dir RegExp
-# Moure a TOP
-# Currency, Tel., ... 
-### Exemple
+# RegexpParser de NLTK:
 
 ```python3
 import nltk    
@@ -443,8 +439,12 @@ conditional random fields
 - Experimenteu amb features addicionals (paràmetre `feature_func`).
 - Experimenteu amb diferents codificacions:
   - BIO / BIOW / IO / ...
+---
+
 - Executeu el vostre model amb textos reals
 - Comenteu els resultats
+
+---
 
 # Feature functions a NLTK (CRF):
 - La funció d'extracció de features per defecte a la classe `nltk.tag.CRFTagger` de NLTK inclou les següents features:
@@ -461,3 +461,12 @@ def get_features(tokens: List[str], idx: int) -> List[str]:
   - Morfologia,longitud,
   - Prefixos,lemmas,POS-Tags
   - Gazetteers,llistes de paraules
+
+---
+
+# Opcional: CADEC Corpus
+- Entreneu el vostre model de NER amb el corpus [CADEC](./cadec.conll.zip)
+  - Format: Cada columna representa un tipus d'entitat: Adverse Drug Reaction (ADR), Disease (Di), Drug (Dr), Symptom (S), Finding (F)
+  - Cada Tag representa l'identificador estandarditzat al Knowledge base
+  - **Només considereu tipus d'entitats, no identificadors**. E.g. ADR, Di, Dr, S, F
+- Afegiu les features que considereu necessaries per millorar el vostre model amb aquest corpus.
