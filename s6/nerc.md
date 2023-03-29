@@ -28,10 +28,6 @@ class: left, middle, inverse
 
 - Pràctica 3: Extracció d'Informació
 
----
-
-# NER (II)
-
 
 ---
 
@@ -241,11 +237,6 @@ class: left, middle, inverse
 
 ---
 
-# NP Chunking (III)
-
-
----
-
 # RegexpParser de NLTK:
 
 ```python3
@@ -357,10 +348,6 @@ ChunkParse score:
     Recall:        24.2%%
     F-Measure:     31.6%%
 ```
----
-
-# POS Tagging (I)
-
 ---
 
 # Conditional Random Fields I
