@@ -384,6 +384,27 @@ tree
 ![:scale 70%](figures/pcfg.png)
 
 ---
+
+# Exercici Obligatori
+## Enunciat:
+
+Considereu la següent frase:
+```
+Lazy cats play with mice.
+```
+
+- Amplieu la gramàtica de [l'exemple](https://raw.githubusercontent.com/gebakx/ihlt/master/s8/codes/s8a.ipynb) relacionat amb analitzadors de gràfics no probabilistes per subsumir aquesta nova frase.
+
+- Realitzeu l'anàlisi de circumscripció utilitzant un BottomUpChartParser, un BottomUpLeftCornerChartParser i un LeftCornerChartParser.
+
+- Per a cadascun d'ells, proporcioneu l'arbre resultant, el nombre d'arestes i la llista d'arestes explorades.
+
+- Quin analitzador és el més eficient per analitzar la frase?
+
+- Quines arestes es filtren per cada analitzador i per què?
+
+
+---
 class: left, middle, inverse
 
 # Sumari
