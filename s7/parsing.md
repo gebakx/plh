@@ -33,9 +33,6 @@ class: left, middle, inverse
 
 # Parsing de constituents amb l'NLTK
 
-TODO: Afegir CCGChartParser (CKY) Chomsky Normal Form
-Idea: Donada una gramatica no CNF, fer el necesari...
-TODO: Viterbi amb CKY
 
 ### Parsers no probabilístics
 
