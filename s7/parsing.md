@@ -23,6 +23,7 @@ class: left, middle, inverse
   - No probabilístics
 
   - Probabilístics
+
 - Exercici Constituents
 
 - Parsing de Dependències
@@ -64,11 +65,12 @@ class: left, middle, inverse
   - .cyan[No probabilístics]
 
   - Probabilístics
+  
+- Exercici Constituents
 
-- Parsing de dependències
+- Parsing de Dependències
 
-- Exercici
-
+- Exercici Dependències
 ---
 
 # Charts I
@@ -201,9 +203,11 @@ class: left, middle, inverse
 
   - .cyan[Probabilístics]
 
-- Parsing de dependències
+- Exercici Constituents
 
-- Exercici
+- Parsing de Dependències
+
+- Exercici Dependències
 
 ---
 
@@ -384,6 +388,23 @@ tree
 ![:scale 70%](figures/pcfg.png)
 
 ---
+class: left, middle, inverse
+
+# Sumari
+
+- .brown[Parsing de constituents]
+
+  - .brown[No probabilístics]
+
+  - .brown[Probabilístics]
+
+- .cyan[Exercici Constituents]
+
+- Parsing de Dependències
+
+- Exercici Dependències
+
+---
 
 # Exercici Obligatori
 ## Enunciat:
@@ -415,9 +436,11 @@ class: left, middle, inverse
 
   - .brown[Probabilístics]
 
-- .cyan[Parsing de dependències]
+- .brown[Exercici Constituents]
 
-- Exercici
+- .cyan[Parsing de Dependències]
+
+- Exercici Dependències
 
 ---
 
@@ -522,9 +545,11 @@ class: left, middle, inverse
 
   - .brown[Probabilístics]
 
-- .brown[Parsing de dependències]
+- .brown[Exercici Constituents]
 
-- .cyan[Exercici]
+- .brown[Parsing de Dependències]
+
+- .cyan[Exercici de Dependències]
 
 ---
 
@@ -540,5 +565,5 @@ class: left, middle, inverse
 
 - Compareu els resultats
 
-- Quines conclussions en podeu treure?
+- Quines conclusions en podeu treure?
 
