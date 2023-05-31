@@ -21,10 +21,10 @@ class: left, middle, inverse
 - .cyan[Embeddings Contextuals]
   - .cyan[Embeddings ELMo]
   - Transformers: BERT
-  - Transformador afinat: RoBERTa-STS
+  - Transformer afinat: RoBERTa-STS
   - Representació
 
-- Transformador afinat
+- Transformer afinat
   - Transformers: Pipelines
   - Exemple
 
@@ -59,12 +59,12 @@ model_output["elmo"]
 
 Recorda que estem copiant tota l'arquitectura. Per defecte, calculem els embeddings com una mitjana ponderada de la primera, segona i tercera capa. Podem obtenir altres sortides:
 
-#### Utilitza `as_dict=True`. La sortida conté les següents claus:
-- word_emb: les representacions de paraules basades en caràcters amb forma [batch_size, max_length, 512].
-- lstm_outputs1: el primer estat ocult LSTM amb forma [batch_size, max_length, 1024].
-- lstm_outputs2: el segon estat ocult LSTM amb forma [batch_size, max_length, 1024].
-- elmo: la suma ponderada de les 3 capes, on els pesos són entrenables. Aquest tensor té forma [batch_size, max_length, 1024]
-- default: una mitjana fixa de totes les representacions de paraules contextualitzades amb forma [batch_size, 1024].
+#### Amb `as_dict=True`, La sortida conté les següents claus:
+- `word_emb`: les representacions de paraules basades en caràcters amb forma [batch_size, max_length, 512].
+- `lstm_outputs1`: el primer estat ocult LSTM amb forma [batch_size, max_length, 1024].
+- `lstm_outputs2`: el segon estat ocult LSTM amb forma [batch_size, max_length, 1024].
+- `elmo`: la suma ponderada de les 3 capes, on els pesos són entrenables. Aquest tensor té forma [batch_size, max_length, 1024]
+- `default`: una mitjana fixa de totes les representacions de paraules contextualitzades amb forma [batch_size, 1024].
 
 
 ---
@@ -116,7 +116,7 @@ embeddings = get_bert_embeddings(sentences)
 
 ---
 
-# Transformador afinat: RoBERTa-STS
+# Transformer afinat: RoBERTa-STS
 
 Podem utilitzar models afinats per a calcular la similitud de frases.
 
