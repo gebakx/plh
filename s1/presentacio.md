@@ -70,7 +70,7 @@ class: left, middle, inverse
   - Identificació de la llengua
   - Detecció opinions: models supervisat i no supervisat
   - Entrenar un model per *Name Entities*
-  - Chatbot
+  - Aplicació de Word Vectors
 
 **Items d'avaluació**:
 
@@ -213,12 +213,12 @@ Visual Q&A Demo: [http://visualqa.csail.mit.edu/](http://visualqa.csail.mit.edu/
 
 # Resum automàtic
 
-QuillBot Summarizer:
-[https://quillbot.com/summarize](https://quillbot.com/summarize)
+Huggingface Online Demo (Bart):
+[https://huggingface.co/tasks/summarization](https://huggingface.co/tasks/summarization)
 
-![:scale 105%](figures/summarize.png)
+![:scale 105%](figures/summarization.png)
 
-Font del text: [Vilaweb](https://www.vilaweb.cat/noticies/pere-aragones-at-un-spain-doesnt-protect-catalan-language/)
+Font del text: [Wikipedia](https://en.wikipedia.org/wiki/Javier_Milei)
 
 ---
 
@@ -228,7 +228,7 @@ Font del text: [Vilaweb](https://www.vilaweb.cat/noticies/pere-aragones-at-un-sp
 .col1[
 **Dall-e 2**:
 
-[https://openai.com/dall-e-2/](https://openai.com/dall-e-2/)
+[https://openai.com/index/dall-e-3/](https://openai.com/index/dall-e-3/)
 
 **Example**:
 
@@ -248,7 +248,7 @@ Font del text: [Vilaweb](https://www.vilaweb.cat/noticies/pere-aragones-at-un-sp
 
 # ChatGPT I
 
-Xat de OpenAI: [https://openai.com/blog/chatgpt/](https://openai.com/blog/chatgpt/)
+Xat de OpenAI: [https://chatgpt.com/](https://chatgpt.com/)
 
 Exemple:
 
