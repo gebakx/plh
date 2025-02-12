@@ -264,6 +264,16 @@ Exemple:
 
 
 ---
+
+# Enllaços d'interès
+
+- Huggingface Blog [https://huggingface.co/blog](https://huggingface.co/blog)
+- NLP-Progress [https://nlpprogress.com/](https://nlpprogress.com/)
+- Papers with Code [https://paperswithcode.com/](https://paperswithcode.com/)
+- Research Blogs ([https://research.google/blog/](https://research.google/blog/), [https://research.facebook.com/blog/](https://research.facebook.com/blog/), ...)
+
+---
+
 class: left, middle, inverse
 
 # Sumari
