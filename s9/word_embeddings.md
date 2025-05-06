@@ -18,12 +18,12 @@ class: left, middle, inverse
 # Sumari
 
 - .cyan[Word Embeddings]
-  - .cyan[Word Embeddings amb Gensim]: Models, Entrenament, Analogies, Avaluació
-  - Visualització d'Embeddings: t-SNE
-  - FastText amb Gensim: Models, OOV, N-grams
-  - Gensim Avançat: Memory Maps, Reducció de Dimensionalitat
-  - Ponderació d'Embeddings: TF-IDF
-  - Word Embeddings amb spaCy: Models Estàtics i Transformers
+  - .cyan[Word Embeddings amb Gensim]
+  - Visualització d'Embeddings
+  - FastText amb Gensim
+  - Memory Maps, Reducció de Dimensionalitat
+  - Ponderació d'Embeddings
+  - Word Embeddings amb spaCy
 - Exercici
 - Pràctica 4
 
@@ -242,8 +242,8 @@ Si encara teniu problemes de RAM, una alternativa pot ser la reducció de dimens
 
 # Ponderació d'Embeddings amb TF-IDF
 
-Per obtenir un embedding d'un document, es pot fer la mitjana ponderada dels embeddings de les seves paraules, utilitzant TF-IDF com a pes.
-$$V_d = \frac{\sum_{t \in d} \text{TF-IDF}(t, d, D) \cdot V_t}{\sum_{t \in d} \text{TF-IDF}(t, d, D)}$$
+Per obtenir un embedding d'un document, es pot fer la mitjana ponderada dels embeddings de les seves paraules, utilitzant TF-IDF com a pes. 
+$V\_d = \\frac{\\sum\_{t \\in d} TF-IDF(t, d, D) \\cdot V\_t}{\\sum\_{t \\in d} TF-IDF(t, d, D)}$
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -379,7 +379,7 @@ class: left, middle, inverse
       * Arquitectura: Concatenar $\\rightarrow$ Capa(es) densa(es) $\\rightarrow$ Sortida (valor de similitud).
   * **Model de Regressió 2 (Seqüència d'Embeddings):**
       * Input: Dues seqüències d'embeddings de paraules (o índexs de paraules).
-      * Arquitectura: Capa d'Embedding $\\rightarrow$ Capa d'agregació (Ex: GlobalAveragePooling, o Atenció) $\\rightarrow$ Concatenar $\\rightarrow$ Capa(es) densa(es) $\\rightarrow$ Sortida. ---
+      * Arquitectura: Capa d'Embedding $\\rightarrow$ Capa d'agregació (Ex: GlobalAveragePooling, o Atenció) $\\rightarrow$ Concatenar $\\rightarrow$ Capa(es) densa(es) $\\rightarrow$ Sortida.
 ---
 * **Altres (Comparativa Avançada):**
     * One-Hot (com a baseline molt simple, limitar vocabulari).
