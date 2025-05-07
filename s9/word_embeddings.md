@@ -355,7 +355,7 @@ class: left, middle, inverse
 
 **Tasques principals:**
 
-1.  **Preparació d'Embeddings:**
+(1.)  **Preparació d'Embeddings:**
       * Carregar el model `model_300d.kv`.
       * Generar versions d'embeddings de dimensions més petites (ex: 50, 100, 150 dimensions) a partir del model de 300 dimensions (ex: mitjançant truncament).
 
@@ -363,7 +363,7 @@ class: left, middle, inverse
 
 # Pràctica 4: Enunciat (2/3)
 
-2.  **Entrenament i Avaluació de Models de Similitud Textual Semàntica (STS):**
+(2.)  **Entrenament i Avaluació de Models de Similitud Textual Semàntica (STS):**
 * **Representació de les frases:**
 
     * Mitjana simple dels embeddings de les paraules.
@@ -376,10 +376,10 @@ class: left, middle, inverse
       * Calcular la similitud cosinus entre els dos vectors. No s'entrena.
   * **Model de Regressió 1 (Embeddings Agregats):**
       * Input: Dos vectors agregats (un per frase).
-      * Arquitectura: Concatenar $\\rightarrow$ Capa(es) densa(es) $\\rightarrow$ Sortida (valor de similitud).
+      * Arquitectura: Transformació (Dense) $\\rightarrow$ Sortida (valor de similitud).
   * **Model de Regressió 2 (Seqüència d'Embeddings):**
       * Input: Dues seqüències d'embeddings de paraules (o índexs de paraules).
-      * Arquitectura: Capa d'Embedding $\\rightarrow$ Capa d'agregació (Ex: GlobalAveragePooling, o Atenció) $\\rightarrow$ Concatenar $\\rightarrow$ Capa(es) densa(es) $\\rightarrow$ Sortida.
+      * Arquitectura: Capa d'Embedding $\\rightarrow$ Capa d'agregació (Ex: GlobalAveragePooling, o Atenció) $\\rightarrow$ Transformació (Dense) $\\rightarrow$ Sortida.
 ---
 * **Altres (Comparativa Avançada):**
     * One-Hot (com a baseline molt simple, limitar vocabulari).
@@ -391,17 +391,17 @@ class: left, middle, inverse
 
 # Pràctica 4: Enunciat (3/3)
 
-3.  **Experimentació amb Embeddings Entrenables (per als Models de Regressió):**
+(3.)  **Experimentació amb Embeddings Entrenables (per als Models de Regressió):**
 
-      * Entrenar els models de regressió (podeu fer servir el Model 2) amb una capa d'embeddings que s'inicialitzi de diferents maneres i que es pugui fine-tunejar:
-          * Inicialització aleatòria.
-          * Inicialització amb els vostres embeddings pre-entrenats (Word2Vec de diferents dimensions).
-      * Analitzar si permetre el fine-tuning dels embeddings millora el rendiment.
+* Entrenar els models de regressió (podeu fer servir el Model 2) amb una capa d'embeddings que s'inicialitzi de diferents maneres i que es pugui fine-tunejar:
+    * Inicialització aleatòria.
+    * Inicialització amb els vostres embeddings pre-entrenats (Word2Vec de diferents dimensions).
+* Analitzar si permetre el fine-tuning dels embeddings millora el rendiment.
 
-4.  **Anàlisi de Resultats:**
+(4.)  **Anàlisi de Resultats:**
 
-      * Comparar el rendiment dels diferents models i configuracions.
-      * Analitzar l'impacte de la dimensionalitat dels embeddings, ponderació TF-IDF, ús d'atenció, etc.
+* Comparar el rendiment dels diferents models i configuracions.
+* Analitzar l'impacte de la dimensionalitat dels embeddings, ponderació TF-IDF, ús d'atenció, etc.
 
 **Opcional:**
 
@@ -426,7 +426,7 @@ Calcula la similitud cosinus entre les representacions vectorials agregades de l
 
 ---
 
-# Pràctica 4: Model 1 (Agregats)
+# Pràctica 4: Exemple Model 1 (Agregats)
 
 Aquest model rep com a entrada els vectors de frase ja agregats.
 
@@ -504,7 +504,7 @@ class SimpleAttention(tf.keras.layers.Layer):
 
 ---
 
-# Pràctica 4: Model 2 (Seqüencial)
+# Pràctica 4: Exemple Model 2 (Seqüencial)
 
 Aquest model rep seqüències d'índexs de paraules, utilitza una capa d'embedding i una capa d'agregació (Pooling o Atenció).
 
@@ -550,6 +550,30 @@ def build_model_sequential(
     model.compile(loss='mean_squared_error', optimizer=tf.keras.optimizers.Adam(0.001), 
                   metrics=['mae', tf.keras.metrics.RootMeanSquaredError()])
     return model
+```
+
+---
+
+# Pràctica 4: Capa de Sortida Alternativa
+
+Com a capa de sortida alternativa podeu fer servir la distància cosinus.
+
+```python
+projected_1 = tf.linalg.l2_normalize(vector_1, axis=1, )
+projected_2 = tf.linalg.l2_normalize(vector_2, axis=1, )
+output = 2.5 * (1.0 + tf.reduce_sum(projected_1 * projected_2, axis=1, ))
+```
+
+Però no te weights, haureu d'afegir una transformació. Per exemple:
+
+```python
+projection = tf.keras.layers.Dense(
+    embedding_size,
+    kernel_initializer=tf.keras.initializers.Identity(),
+    bias_initializer=tf.keras.initializers.Zeros(),
+)
+vector_1 = projection(input_1)
+vector_2 = projection(input_2)
 ```
 
 ---
