@@ -576,6 +576,8 @@ vector_1 = projection(input_1)
 vector_2 = projection(input_2)
 ```
 
+Codis d'exemple: [single_vector_model](single_vector_model.ipynb), [sequence_model](sequence_model.ipynb)
+
 ---
 
 # Pràctica 4: Notes sobre Implementació
