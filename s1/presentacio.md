@@ -108,9 +108,9 @@ class: left, middle, inverse
 !pip install svgling
 import nltk
 import svgling
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
+nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('maxent_ne_chunker_tab')
 nltk.download('words')
 s = 'Mark is working at Google.'
 x = nltk.pos_tag(nltk.word_tokenize(s))

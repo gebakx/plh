@@ -43,7 +43,7 @@ class: left, middle, inverse
 
 ```
 import nltk
-nltk.download('punkt')
+nltk.download('punkt_tab')
 ```
 
 ### Divisió en frases (*Sentence Splitting*)
