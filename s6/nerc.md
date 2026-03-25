@@ -41,9 +41,9 @@ class: left, middle, inverse
 
 ```python3
 import nltk
-nltk.download('punkt') # Tokenitzador
-nltk.download('averaged_perceptron_tagger') # Etiquetador POS
-nltk.download('maxent_ne_chunker') # Etiquetador Entitats Anomenades
+nltk.download('punkt_tab') # Tokenitzador
+nltk.download('averaged_perceptron_tagger_eng') # Etiquetador POS
+nltk.download('maxent_ne_chunker_eng') # Etiquetador Entitats Anomenades
 nltk.download('words')
 ```
 
