@@ -340,286 +340,230 @@ Per a la Pràctica 4, comparareu embeddings estàtics (Word2Vec, spaCy `_md`) am
 
 class: left, middle, inverse
 
-# Pràctica 4: Similitud Semàntica de Textos
+# Pràctica 4: Similitud Lèxica i Semàntica en Espanyol
 
 ---
 
 # Pràctica 4: Enunciat (1/3)
 
-**Objectiu principal:** Entrenar i avaluar models de Similitud de Text Semàntic (STS) per al català.
+**Objectiu principal:** Entrenar i avaluar models d’**embeddings distribucionals i contextuals** per a tasques de similitud en espanyol.
 
 **Datasets:**
 
-  - **Text Similarity (STS-ca):** [projecte-aina/sts-ca](https://huggingface.co/datasets/projecte-aina/sts-ca) (principal per a l'entrenament i avaluació). Puntuacions de similitud entre 0 i 5.
-  - **Font d'Embeddings:** Un model Word2Vec pre-entrenat sobre català de 300 dimensions (ex: `cc.ca.300.vec` de FastText, o un model Word2Vec de qualitat). Anomenem-lo `model_300d.kv`.
+* **Multi-SimLex (Spanish):** conjunt de parells de paraules amb puntuacions de similitud semàntica. Es farà servir per a l’**avaluació intrínseca**.
+* **Spanish STS:** conjunt de parells de frases amb puntuacions de similitud semàntica. Es farà servir per a l’**avaluació extrínseca** ([STS](https://huggingface.co/datasets/PlanTL-GOB-ES/sts-es)).
+* **Corpus per entrenar embeddings:** corpus wiki en espanyol: [raw.es.tgz](https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz)
 
-**Tasques principals:**
+**Mètriques oficials:**
 
-(1.)  **Preparació d'Embeddings:**
-      * Carregar el model `model_300d.kv`.
-      * Generar versions d'embeddings de dimensions més petites (ex: 50, 100, 150 dimensions) a partir del model de 300 dimensions (ex: mitjançant truncament).
+* **Multi-SimLex:** correlació de **Spearman**
+* **Spanish STS:** correlació de **Pearson**
+---
+
+# Pràctica 4: Tasques (2/3)
+
+### 1.  **Entrenament d’Embeddings Estàtics:**
+* Entrenar diferents models de **Word2Vec** i/o **fastText** amb  [raw.es.tgz](https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz).
+* Podeu comparar dimensions d’embeddings (e.g. 25, 50, 100) o mida del corpus.
+
+### 2.  **Avaluació Intrínseca (Multi-SimLex):**
+* **Representació lèxica:**
+  * Per a cada parell de paraules, obtenir els vectors corresponents.
+  * Calcular-ne la **similitud cosinus**.
+  * Comparar-la amb la puntuació humana fent servir la **correlació de Spearman**.
+  * Podeu comentar l'efecte de les OOV.
+* **Models a comparar:**
+  * Word2Vec i/o fastText entrenat sobre wiki
+  * fastText oficial [FastText](https://fasttext.cc/docs/en/crawl-vectors.html)
 
 ---
 
-# Pràctica 4: Enunciat (2/3)
+### 3.  **Avaluació Extrínseca (Spanish STS):**
 
-(2.)  **Entrenament i Avaluació de Models de Similitud Textual Semàntica (STS):**
 * **Representació de les frases:**
-
-    * Mitjana simple dels embeddings de les paraules.
-    * Mitjana ponderada amb TF-IDF dels embeddings de les paraules.
+  * Mitjana simple dels embeddings de les paraules i mitjana ponderada amb **TF-IDF**.
+  * Model seqüencial sobre embeddings estàtics.
+  * Model contextual basat en BERT.
 
 * **Models a comparar:**
-
   * **Baseline Cosinus:**
-      * Representar cada frase com un vector (mitjana o mitjana ponderada TF-IDF).
-      * Calcular la similitud cosinus entre els dos vectors. No s'entrena.
-  * **Model de Regressió 1 (Embeddings Agregats):**
-      * Input: Dos vectors agregats (un per frase).
-      * Arquitectura: Transformació (Dense) $\\rightarrow$ Sortida (valor de similitud).
-  * **Model de Regressió 2 (Seqüència d'Embeddings):**
-      * Input: Dues seqüències d'embeddings de paraules (o índexs de paraules).
-      * Arquitectura: Capa d'Embedding $\\rightarrow$ Capa d'agregació (Ex: GlobalAveragePooling, o Atenció) $\\rightarrow$ Transformació (Dense) $\\rightarrow$ Sortida.
----
-* **Altres (Comparativa Avançada):**
-    * One-Hot (com a baseline molt simple, limitar vocabulari).
-    * Embeddings de spaCy (`ca_core_news_md` - mitjana).
-    * Embeddings de RoBERTa (`projecte-aina/roberta-base-ca-v2` o via spaCy `ca_core_news_trf` - vector CLS o mitjana).
-    * Model RoBERTa fine-tuned per STS (ex: `projecte-aina/roberta-base-ca-v2-cased-sts`).
+    * Representar cada frase com un vector agregat.
+    * Calcular la similitud cosinus entre les dues frases.
+  * **Model Seqüencial Siamès (amb Embeddings estàtics):**
+    * Input: dues seqüències d’índexs de paraules.
+    * Arquitectura: **Embedding** (pre-entrenats o aleatoris) $\rightarrow$ **BiLSTM** $\rightarrow$ **Atenció** $\rightarrow$ **MLP de regressió** $\rightarrow$ valor de similitud.
+    * Per als word-embeddings pre-entrenats: entrenables o no entrenables.
+  * **Model BERT Siamès:**
+    * Input: dues frases tokenitzades amb BERT.
+    * Arquitectura: **BERT** $\rightarrow$ **Pooling** $\rightarrow$ **MLP de regressió** $\rightarrow$ valor de similitud.
 
 ---
 
-# Pràctica 4: Enunciat (3/3)
-
-(3.)  **Experimentació amb Embeddings Entrenables (per als Models de Regressió):**
-
-* Entrenar els models de regressió (podeu fer servir el Model 2) amb una capa d'embeddings que s'inicialitzi de diferents maneres i que es pugui fine-tunejar:
-    * Inicialització aleatòria.
-    * Inicialització amb els vostres embeddings pre-entrenats (Word2Vec de diferents dimensions).
-* Analitzar si permetre el fine-tuning dels embeddings millora el rendiment.
-
-(4.)  **Anàlisi de Resultats:**
+### 4.  **Anàlisi de Resultats:**
 
 * Comparar el rendiment dels diferents models i configuracions.
-* Analitzar l'impacte de la dimensionalitat dels embeddings, ponderació TF-IDF, ús d'atenció, etc.
+* Analitzar:
+  * l’efecte de la dimensionalitat/mida del corpus dels embeddings
+  * la diferència amb **fastText** oficial
+  * el guany de passar d’una mitjana de vectors a un **model seqüencial**
+  * el guany de passar d’embeddings estàtics a un model **BERT** contextual
 
-**Opcional:**
-
-  - Entrenar un model de classificació amb el conjunt de dades [Text Classification (TECLA)](https://huggingface.co/datasets/projecte-aina/tecla).
-
----
-
-# Pràctica 4: Baseline Cosinus
-
-Calcula la similitud cosinus entre les representacions vectorials agregades de les dues frases. No requereix entrenament.
-
-**Passos:**
-
-1.  Per a cada frase (sent1, sent2) del dataset STS:
-    1. Tokenitzar la frase.
-    2. Per a cada token, obtenir el seu vector d'embedding (`model_kv`).
-    3. **Representació de la frase (Vector Agregat):**
-        * **Opció A: Mitjana Simple:** `np.mean([model_kv[t] for t in tokens if t in model_kv], axis=0)`
-        * **Opció B: Mitjana Ponderada amb TF-IDF:** Utilitzar la funció `get_weighted_sentence_vector` definida anteriorment.
-2.  Calcular la similitud cosinus entre el vector de sent1 i el de sent2.
-3.  Avaluar contra els gold scores (Correlació de Pearson).
+* Opcional:
+  * Analitzar **OOV** i cobertura lèxica.
+  * Construir una versió **pertorbada** del conjunt de test per estudiar la robustesa dels embeddings davant d’errors tipogràfics, variants morfològiques o absència d’accents.
 
 ---
 
-# Pràctica 4: Exemple Model 1 (Agregats)
+# Pràctica 4: Referències (3/3)
 
-Aquest model rep com a entrada els vectors de frase ja agregats.
+### Baseline Cosinus
+
+Calcula la similitud cosinus entre les representacions vectorials agregades de les dues frases. No requereix entrenament. Pasos:
+
+1. Per a cada parell de frases `(sent1, sent2)` del dataset STS:
+   1. Tokenitzar les frases.
+   2. Per a cada token, obtenir el seu vector d’embedding.
+   3. **Representació de la frase (Vector agregat):**
+      * **Opció A: Mitjana Simple:** `mean(vectors)`
+      * **Opció B: Mitjana Ponderada amb TF-IDF**
+2. Calcular la similitud cosinus entre el vector de `sent1` i el de `sent2`.
+3. Avaluar contra els gold scores amb **correlació de Pearson**.
+
+---
+
+### Model Seqüencial Siamès
+
+Aquest model rep seqüències d’índexs de paraules i utilitza embeddings estàtics com a entrada.
 
 ```python
-import tensorflow as tf
+import torch
+import torch.nn as nn
 
-def build_model_aggregated(embedding_dim: int, hidden_size: int = 128, dropout_rate: float = 0.3) -> tf.keras.Model:
-    input_1 = tf.keras.Input(shape=(embedding_dim,), name="input_vector_1")
-    input_2 = tf.keras.Input(shape=(embedding_dim,), name="input_vector_2")
-    
-    concatenated = tf.keras.layers.Concatenate(axis=-1)([input_1, input_2])
-    x = tf.keras.layers.BatchNormalization()(concatenated)
-    
-    x = tf.keras.layers.Dense(hidden_size, activation='relu')(x)
-    x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Dropout(dropout_rate)(x)
-    
-    output = tf.keras.layers.Dense(1)(x) # Activació lineal per a regressió
-    
-    model = tf.keras.Model(inputs=[input_1, input_2], outputs=output)
-    model.compile(loss='mean_squared_error', optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-                  metrics=['mae', tf.keras.metrics.RootMeanSquaredError()])
-    return model
+class AttentionPooling(nn.Module):
+    def __init__(self, hidden_dim):
+        super().__init__()
+        self.proj = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.Tanh(),
+            nn.Linear(hidden_dim, 1)
+        )
 
-model_agg = build_model_aggregated(embedding_dim=300)
-model_agg.fit([X1_train, X2_train], Y_train, epochs=..., batch_size=...)
+    def forward(self, x, mask):
+        scores = self.proj(x).squeeze(-1)
+        scores = scores.masked_fill(~mask, -1e9)
+        alpha = torch.softmax(scores, dim=-1)
+        return torch.sum(x * alpha.unsqueeze(-1), dim=1)
 ```
 
 ---
 
-# Pràctica 4: Mecanisme d'Atenció
-
-Per al Model 2, en lloc d'una simple mitjana (`GlobalAveragePooling`), l'atenció permet ponderar la importància de cada paraula en la frase.
-
-**Idea Bàsica (Self-Attention Simple per Pooling):**
-Per a una seqüència d'embeddings $(e\_1, \\ldots, e\_L)$:
-
-1.  Calcular "scores" d'importància $s\_i = \\tanh(W\_1 e\_i + b\_1)$.
-2.  Normalitzar els scores (softmax) per obtenir pesos $\\alpha\_i = \\frac{\\exp(s\_i)}{\\sum \\exp(s\_j)}$.
-3.  El vector de frase $v\_{frase} = \\sum \\alpha\_i \\cdot e\_i$.
-
-Aquest $v\_{frase}$ és una representació més rica que una simple mitjana.
-
----
-
 ```python
-import tensorflow as tf
+class SiameseBiLSTMAttention(nn.Module):
+    def __init__(self, embedding_matrix, hidden_size=16, final_hidden_size=8, trainable_embeddings=False):
+        super().__init__()
+        self.embedding = nn.Embedding.from_pretrained(
+            torch.tensor(embedding_matrix, dtype=torch.float),
+            freeze=not trainable_embeddings,
+            padding_idx=0
+        )
+        emb_dim = embedding_matrix.shape[1]
+        self.encoder = nn.LSTM(
+            emb_dim, hidden_size, batch_first=True, bidirectional=True
+        )
+        self.pool = AttentionPooling(hidden_size * 2)
+        self.regressor = nn.Sequential(
+            nn.Linear(hidden_size * 2 * 4, final_hidden_size),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(final_hidden_size, 1)
+        )
 
-class SimpleAttention(tf.keras.layers.Layer):
-    def __init__(self, units=128, **kwargs):
-        super(SimpleAttention, self).__init__(**kwargs)
-        self.units = units
-        self.W1 = tf.keras.layers.Dense(units, activation='tanh')
-        self.W2 = tf.keras.layers.Dense(1) # Per obtenir el score final per cada pas de temps
+    def encode(self, input_ids, attention_mask):
+        x = self.embedding(input_ids)
+        x, _ = self.encoder(x)
+        return self.pool(x, attention_mask)
 
-    def call(self, inputs, mask=None): # `inputs` shape: (batch, seq_len, embedding_dim)
-        ui = self.W1(inputs) # (batch, seq_len, self.units)
-        scores = self.W2(ui) # (batch, seq_len, 1)
-        scores = tf.squeeze(scores, axis=-1) # (batch, seq_len)
-
-        if mask is not None: # La màscara prové de la capa Embedding (mask_zero=True)
-            scores = tf.where(mask, scores, tf.fill(tf.shape(scores), -1e9)) # Aplica la màscara
-
-        alpha = tf.keras.activations.softmax(scores, axis=-1) # (batch, seq_len)
-        alpha_expanded = tf.expand_dims(alpha, axis=-1) # (batch, seq_len, 1)
-        
-        context_vector = tf.reduce_sum(alpha_expanded * inputs, axis=1) # (batch, embedding_dim)
-        return context_vector
-
-    def get_config(self):
-        config = super().get_config()
-        config.update({'units': self.units})
-        return config
+    def forward(self, input_ids_1, attention_mask_1, input_ids_2, attention_mask_2):
+        h1 = self.encode(input_ids_1, attention_mask_1)
+        h2 = self.encode(input_ids_2, attention_mask_2)
+        feats = torch.cat([h1, h2, torch.abs(h1 - h2), h1 * h2], dim=-1)
+        return self.regressor(feats).squeeze(-1)
 ```
 
 ---
 
-# Pràctica 4: Exemple Model 2 (Seqüencial)
+### Model BERT Siamès
 
-Aquest model rep seqüències d'índexs de paraules, utilitza una capa d'embedding i una capa d'agregació (Pooling o Atenció).
+Aquest model utilitza un model contextual per a espanyol i aprèn una regressió per STS.
 
 ```python
-def build_model_sequential(
-    input_length: int, dictionary_size: int, embedding_dim: int, 
-    dense_hidden_size: int = 128, dropout_rate: float = 0.3,
-    embedding_matrix=None, trainable_embeddings: bool = False,
-    use_attention: bool = False, attention_units: int = 64 
-) -> tf.keras.Model:
+import torch
+import torch.nn as nn
+from transformers import AutoModel
 
-    input_1 = tf.keras.Input(shape=(input_length,), dtype=tf.int32, name="input_tokens_1")
-    input_2 = tf.keras.Input(shape=(input_length,), dtype=tf.int32, name="input_tokens_2")
+class MeanPooling(nn.Module):
+    def forward(self, last_hidden_state, attention_mask):
+        mask = attention_mask.unsqueeze(-1).float()
+        x = last_hidden_state * mask
+        return x.sum(dim=1) / mask.sum(dim=1).clamp(min=1e-9)
 
-    embedding_layer = tf.keras.layers.Embedding(
-        input_dim=embedding_matrix.shape[0] if embedding_matrix is not None else dictionary_size, 
-        output_dim=embedding_dim, input_length=input_length, 
-        weights=[embedding_matrix] if embedding_matrix is not None else None,
-        trainable=trainable_embeddings, mask_zero=True
-    )          
-    embedded_1 = embedding_layer(input_1)
-    embedded_2 = embedding_layer(input_2)
+class BETOSiameseRegressor(nn.Module):
+    def __init__(self, model_name="dccuchile/bert-base-spanish-wwm-cased", final_hidden_size=8):
+        super().__init__()
+        self.encoder = AutoModel.from_pretrained(model_name)
+        self.pool = MeanPooling()
+        hidden = self.encoder.config.hidden_size
+        self.regressor = nn.Sequential(
+            nn.Linear(hidden * 4, final_hidden_size),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(final_hidden_size, 1),
+        )
 
-    if use_attention:
-        # Assegureu-vos que SimpleAttention està definida
-        agg_layer_1 = SimpleAttention(units=attention_units, name="attention_1")
-        agg_layer_2 = SimpleAttention(units=attention_units, name="attention_2")
-    else:
-        agg_layer_1 = tf.keras.layers.GlobalAveragePooling1D(name="gap_1")
-        agg_layer_2 = tf.keras.layers.GlobalAveragePooling1D(name="gap_2")
-    
-    pooled_1 = agg_layer_1(embedded_1, mask=embedding_layer.compute_mask(input_1) if use_attention else None) 
-    pooled_2 = agg_layer_2(embedded_2, mask=embedding_layer.compute_mask(input_2) if use_attention else None)
+    def encode(self, input_ids, attention_mask):
+        outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+        return self.pool(outputs.last_hidden_state, attention_mask)
 
-    concatenated = tf.keras.layers.Concatenate(axis=-1)([pooled_1, pooled_2])
-    x = tf.keras.layers.BatchNormalization()(concatenated)
-    x = tf.keras.layers.Dense(dense_hidden_size, activation='relu')(x)
-    x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Dropout(dropout_rate)(x)    
-    output = tf.keras.layers.Dense(1)(x)
-    
-    model = tf.keras.Model(inputs=[input_1, input_2], outputs=output)
-    model.compile(loss='mean_squared_error', optimizer=tf.keras.optimizers.Adam(0.001), 
-                  metrics=['mae', tf.keras.metrics.RootMeanSquaredError()])
-    return model
+    def forward(self, input_ids_1, attention_mask_1, input_ids_2, attention_mask_2):
+        h1 = self.encode(input_ids_1, attention_mask_1)
+        h2 = self.encode(input_ids_2, attention_mask_2)
+        feats = torch.cat([h1, h2, torch.abs(h1 - h2), h1 * h2], dim=-1)
+        return self.regressor(feats).squeeze(-1)
 ```
 
 ---
 
-# Pràctica 4: Capa de Sortida Alternativa
+### Notes sobre Implementació
 
-Com a capa de sortida alternativa podeu fer servir la distància cosinus.
-
-```python
-projected_1 = tf.linalg.l2_normalize(vector_1, axis=1, )
-projected_2 = tf.linalg.l2_normalize(vector_2, axis=1, )
-output = 2.5 * (1.0 + tf.reduce_sum(projected_1 * projected_2, axis=1, ))
-```
-
-Però no te weights, haureu d'afegir una transformació. Per exemple:
-
-```python
-projection = tf.keras.layers.Dense(
-    embedding_size,
-    kernel_initializer=tf.keras.initializers.Identity(),
-    bias_initializer=tf.keras.initializers.Zeros(),
-)
-vector_1 = projection(input_1)
-vector_2 = projection(input_2)
-```
-
-Codis d'exemple: [single_vector_model](single_vector_model.ipynb), [sequence_model](sequence_model.ipynb)
+* **Tokenització:** Convertiu les frases del dataset STS a seqüències d’índexs de paraules.
+  * Necessitareu un mapa `paraula -> índex` (vocabulari).
+  * Considereu tokens especials com `<PAD>` i `<UNK>`.
+* **Matriu d’Embeddings Pre-entrenats:** Per al model seqüencial, creeu una matriu d’embeddings a partir del model Word2Vec o fastText entrenat.
+  * Construiu la matriu amb el vocabulari que apareix al corpus per reduir el cost en memòria.
+* **Avaluació:**
+  * **Multi-SimLex:** correlació de **Spearman**
+  * **Spanish STS:** correlació de **Pearson**
 
 ---
 
-# Pràctica 4: Notes sobre Implementació
+### Corpora
 
-  * **Tokenització:** Converteix les frases del dataset STS-ca a seqüències d'índexs de paraules.
-      * Necessitareu un mapatge `paraula -> índex` (vocabulari).
-      * Considerar tokens especials com `<PAD>` (per padding) i `<UNK>` (per paraules desconegudes).
-  * **Padding:** Assegurar que totes les seqüències d'entrada al Model 2 tinguin la mateixa longitud (`input_length`). La capa `mask_zero=True` en `Embedding` ajuda a ignorar el padding.
-  * **Matriu d'Embeddings Pre-entrenats:** Per al Model 2, si useu embeddings pre-entrenats, creeu una matriu on la fila $i$ sigui el vector de la paraula amb índex $i$ al vostre vocabulari. Les paraules sense embedding pre-entrenat poden rebre un vector zero o aleatori.
-  * **Avaluació Final:** La mètrica principal per a STS és la **Correlació de Pearson** entre les puntuacions predites i les reals. Calculeu-la sobre el conjunt de test.
-    ```python
-    from scipy.stats import pearsonr
-    y_pred = model.predict([X1_test, X2_test])
-    pearson_corr, _ = pearsonr(Y_test.flatten(), y_pred.flatten())
-    ```
-  * **Experimentació:** Aquesta pràctica és una oportunitat per experimentar\! Proveu diferents dimensions d'embeddings, arquitectures, hiperparàmetres, i analitzeu-ne l'impacte. No hi ha una única "millor" solució.
+## Wikicorpus:
+```bash
+wget https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz
+tar -xzf raw.es.tgz
+```
 
----
-
-# Llibreria `datasets` de Hugging Face
-
-La llibreria `datasets` de Hugging Face facilita la càrrega i processament de grans datasets, incloent els que utilitzareu a la Pràctica 4.
-
+## Spanish STS
 ```python
 from datasets import load_dataset
-
-# Text Similarity (STS) dataset (principal per la Pràctica 4)
-sts_ca_dataset = load_dataset("projecte-aina/sts-ca", split="test") # O 'train', 'validation'
-print(sts_ca_dataset[0])
-# {'sentence1': 'Un home està fregant un terra.', 'sentence2': 'Un home està fregant un terra.', 'score': 5.0, ...}
+sts = load_dataset("PlanTL-GOB-ES/sts-es")
+train_df = sts["train"].to_pandas().rename(columns={"label": "score"})
+dev_df = sts["dev"].to_pandas().rename(columns={"label": "score"})
+test_df = sts["test"].to_pandas().rename(columns={"label": "score"})
 ```
 
-```python
-# Catalan General Crawling (per si volguéssiu entrenar embeddings des de zero)
-# Es recomana utilitzar streaming per a datasets molt grans
-cc_ca_dataset = load_dataset("projecte-aina/catalan_general_crawling", name="clean", split="train", streaming=True)
-for example in cc_ca_dataset.take(1): # Agafa només el primer exemple
-  print(example['text'])
-```
-
-```python
-# Text Classification (TECLA) dataset (per la part opcional)
-tecla_dataset = load_dataset("projecte-aina/tecla", name="categorization", split="train")
-print(tecla_dataset[0])
+## Multi Simlex
+```bash
+wget https://web.archive.org/web/20231020014354/https://multisimlex.com/data/SPA.csv
 ```
