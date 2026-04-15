@@ -107,7 +107,7 @@ kv.doesnt_match(["cadira", "sofa", "gat", "butaca"])
 [https://github.com/vecto-ai/word-benchmarks](https://github.com/vecto-ai/word-benchmarks)
 [https://github.com/RaRe-Technologies/gensim/tree/develop/gensim/test/test_data](https://github.com/RaRe-Technologies/gensim/tree/develop/gensim/test/test_data)
 
-# Avaluar Analogies
+### Avaluar Analogies
 ```python
 from gensim.test.utils import datapath
 analogies_result = kv.evaluate_word_analogies(datapath('questions-words.txt'))
@@ -116,7 +116,7 @@ print(analogies_result[0])
 
 **Nota:** El fitxer `questions-words.txt` és per a anglès. Necessitaríeu un equivalent en català per avaluar correctament un model en català.
 
-# Avaluar Similitud
+### Avaluar Similitud
 ```
 analogies_result = kv.evaluate_word_pairs(datapath('wordsim353.tsv'))
 print(analogies_result) # -> (pearson, spearman, oov_ratio, ) 
@@ -124,7 +124,7 @@ print(analogies_result) # -> (pearson, spearman, oov_ratio, )
 
 ---
 
-# Visualitzar Word Embeddings amb t-SNE
+## Visualitzar Word Embeddings amb t-SNE
 
 ```python
 from sklearn.manifold import TSNE
@@ -196,14 +196,12 @@ model = FastText.load('model.bin', mmap='r')
 
 # Reducció de Dimensionalitat d'Embeddings
 
-Si encara teniu problemes de RAM, una alternativa pot ser la reducció de dimensionalitat dels embeddings. Hi ha diferents maneres de fer-ho.
-
-1.  **Truncament (Slicing):** Més simple i ràpid.
+1.  Truncament (Slicing):
     ```python
     embedding_50d = embedding_300d[:50]
     ```
 
-2.  **Selecció de Dimensions per Variància:** Selecciona les $N$ dimensions amb més variància a través del vocabulari. Més informat que el truncament.
+2.  Selecció de Dimensions per Variància:
 
     ```python
     variances = np.var(all_embeddings_300d, axis=0)
@@ -211,7 +209,7 @@ Si encara teniu problemes de RAM, una alternativa pot ser la reducció de dimens
     word_embedding_Nd = kv['paraula'][top_n_indices]
     ```
 
-3.  **Projeccions Aleatòries (Random Projections):** Projecta a menor dimensió amb una matriu aleatòria. Eficient i teòricament sòlid.
+3.  Projeccions Aleatòries (Random Projections):
 
     ```python
     from sklearn.random_projection import GaussianRandomProjection
@@ -221,14 +219,14 @@ Si encara teniu problemes de RAM, una alternativa pot ser la reducció de dimens
     
 ---
 
-4. **Agregació de Blocs (Chunk Averaging):** Divideix el vector en blocs i calcula la mitjana de cada bloc. Heurística ràpida.
+4. Agregació de Blocs (Chunk Averaging):
 
     ```python
     chunk_size = D_original // D_target
     new_embedding = [np.mean(emb_original[i:i+chunk_size]) for i in range(0, D_target*chunk_size, chunk_size)]
     ```
 
-5. **Anàlisi de Components Principals (PCA):** Troba les $N$ dimensions que maximitzen la variància. Pot preservar millor la informació. Requereix "entrenar" el PCA.
+5. Anàlisi de Components Principals (PCA):
 
     ```python
     from sklearn.decomposition import PCA
@@ -236,7 +234,6 @@ Si encara teniu problemes de RAM, una alternativa pot ser la reducció de dimens
     all_embeddings_Nd = pca.fit_transform(all_embeddings_300d)
     ```
 
-**Recomanació per la pràctica:** Començar amb **Truncament** per la seva simplicitat.
 
 ---
 
@@ -292,7 +289,7 @@ def get_weighted_sentence_vector(sentence_text, tfidf_row_vec, model_kv):
 
 ### Obtenir Word-Embeddings amb spaCy
 
-spaCy facilita l'accés a diferents tipus d'embeddings.
+spaCy permet l'accés a diferents tipus d'embeddings.
 
 ```python
 import spacy
@@ -320,8 +317,6 @@ doc_trf = nlp_trf("El banc ha aprovat el crèdit del banc de peixos.")
 # L'accés als embeddings pot ser via doc._.trf_data o extensions específiques.
 ```
 
-Per a la Pràctica 4, comparareu embeddings estàtics (Word2Vec, spaCy `_md`) amb embeddings derivats de Transformers.
-
 ---
 
 # Exercici:
@@ -340,7 +335,7 @@ Per a la Pràctica 4, comparareu embeddings estàtics (Word2Vec, spaCy `_md`) am
 
 class: left, middle, inverse
 
-# Pràctica 4: Similitud Lèxica i Semàntica en Espanyol
+# Pràctica 4: Similitud Lèxica i Semàntica
 
 ---
 
@@ -348,13 +343,13 @@ class: left, middle, inverse
 
 **Objectiu principal:** Entrenar i avaluar models d’**embeddings distribucionals i contextuals** per a tasques de similitud en espanyol.
 
-**Datasets:**
+### Datasets:
 
 * **Multi-SimLex (Spanish):** conjunt de parells de paraules amb puntuacions de similitud semàntica. Es farà servir per a l’**avaluació intrínseca**.
 * **Spanish STS:** conjunt de parells de frases amb puntuacions de similitud semàntica. Es farà servir per a l’**avaluació extrínseca** ([STS](https://huggingface.co/datasets/PlanTL-GOB-ES/sts-es)).
 * **Corpus per entrenar embeddings:** corpus wiki en espanyol: [raw.es.tgz](https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz)
 
-**Mètriques oficials:**
+### Mètriques oficials:
 
 * **Multi-SimLex:** correlació de **Spearman**
 * **Spanish STS:** correlació de **Pearson**
@@ -362,44 +357,44 @@ class: left, middle, inverse
 
 # Pràctica 4: Tasques (2/3)
 
-### 1.  **Entrenament d’Embeddings Estàtics:**
+### 1.  Entrenament d’Embeddings Estàtics:
 * Entrenar diferents models de **Word2Vec** i/o **fastText** amb  [raw.es.tgz](https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz).
 * Podeu comparar dimensions d’embeddings (e.g. 25, 50, 100) o mida del corpus.
 
-### 2.  **Avaluació Intrínseca (Multi-SimLex):**
-* **Representació lèxica:**
+### 2.  Avaluació Intrínseca (Multi-SimLex):
+* Representació lèxica:
   * Per a cada parell de paraules, obtenir els vectors corresponents.
   * Calcular-ne la **similitud cosinus**.
   * Comparar-la amb la puntuació humana fent servir la **correlació de Spearman**.
   * Podeu comentar l'efecte de les OOV.
-* **Models a comparar:**
+* Models a comparar:
   * Word2Vec i/o fastText entrenat sobre wiki
-  * fastText oficial [FastText](https://fasttext.cc/docs/en/crawl-vectors.html)
+  * fastText oficial ([FastText](https://fasttext.cc/docs/en/crawl-vectors.html))
 
 ---
 
 ### 3.  **Avaluació Extrínseca (Spanish STS):**
 
-* **Representació de les frases:**
+* Representació de les frases:
   * Mitjana simple dels embeddings de les paraules i mitjana ponderada amb **TF-IDF**.
   * Model seqüencial sobre embeddings estàtics.
   * Model contextual basat en BERT.
 
-* **Models a comparar:**
+* Models a comparar:
   * **Baseline Cosinus:**
     * Representar cada frase com un vector agregat.
     * Calcular la similitud cosinus entre les dues frases.
-  * **Model Seqüencial Siamès (amb Embeddings estàtics):**
+  * **Model Seqüencial** Siamès (amb Embeddings estàtics):
     * Input: dues seqüències d’índexs de paraules.
     * Arquitectura: **Embedding** (pre-entrenats o aleatoris) $\rightarrow$ **BiLSTM** $\rightarrow$ **Atenció** $\rightarrow$ **MLP de regressió** $\rightarrow$ valor de similitud.
     * Per als word-embeddings pre-entrenats: entrenables o no entrenables.
-  * **Model BERT Siamès:**
+  * Model **BERT** Siamès:
     * Input: dues frases tokenitzades amb BERT.
     * Arquitectura: **BERT** $\rightarrow$ **Pooling** $\rightarrow$ **MLP de regressió** $\rightarrow$ valor de similitud.
 
 ---
 
-### 4.  **Anàlisi de Resultats:**
+### 4.  Anàlisi de Resultats:
 
 * Comparar el rendiment dels diferents models i configuracions.
 * Analitzar:
@@ -423,9 +418,9 @@ Calcula la similitud cosinus entre les representacions vectorials agregades de l
 1. Per a cada parell de frases `(sent1, sent2)` del dataset STS:
    1. Tokenitzar les frases.
    2. Per a cada token, obtenir el seu vector d’embedding.
-   3. **Representació de la frase (Vector agregat):**
-      * **Opció A: Mitjana Simple:** `mean(vectors)`
-      * **Opció B: Mitjana Ponderada amb TF-IDF**
+   3. Representació de la frase (Vector agregat):
+      * Mitjana Simple: `mean(vectors)`
+      Mitjana Ponderada amb TF-IDF
 2. Calcular la similitud cosinus entre el vector de `sent1` i el de `sent2`.
 3. Avaluar contra els gold scores amb **correlació de Pearson**.
 
@@ -506,7 +501,11 @@ class MeanPooling(nn.Module):
         mask = attention_mask.unsqueeze(-1).float()
         x = last_hidden_state * mask
         return x.sum(dim=1) / mask.sum(dim=1).clamp(min=1e-9)
+```
 
+---
+
+```python
 class BETOSiameseRegressor(nn.Module):
     def __init__(self, model_name="dccuchile/bert-base-spanish-wwm-cased", final_hidden_size=8):
         super().__init__()
@@ -538,7 +537,7 @@ class BETOSiameseRegressor(nn.Module):
 * **Tokenització:** Convertiu les frases del dataset STS a seqüències d’índexs de paraules.
   * Necessitareu un mapa `paraula -> índex` (vocabulari).
   * Considereu tokens especials com `<PAD>` i `<UNK>`.
-* **Matriu d’Embeddings Pre-entrenats:** Per al model seqüencial, creeu una matriu d’embeddings a partir del model Word2Vec o fastText entrenat.
+* **Matriu d’Embeddings** Pre-entrenats: Per al model seqüencial, creeu una matriu d’embeddings a partir del model Word2Vec o fastText entrenat.
   * Construiu la matriu amb el vocabulari que apareix al corpus per reduir el cost en memòria.
 * **Avaluació:**
   * **Multi-SimLex:** correlació de **Spearman**
@@ -548,13 +547,13 @@ class BETOSiameseRegressor(nn.Module):
 
 ### Corpora
 
-## Wikicorpus:
+### Wikicorpus:
 ```bash
 wget https://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz
 tar -xzf raw.es.tgz
 ```
 
-## Spanish STS
+### Spanish STS
 ```python
 from datasets import load_dataset
 sts = load_dataset("PlanTL-GOB-ES/sts-es")
@@ -563,7 +562,7 @@ dev_df = sts["dev"].to_pandas().rename(columns={"label": "score"})
 test_df = sts["test"].to_pandas().rename(columns={"label": "score"})
 ```
 
-## Multi Simlex
+### Multi Simlex
 ```bash
 wget https://web.archive.org/web/20231020014354/https://multisimlex.com/data/SPA.csv
 ```
